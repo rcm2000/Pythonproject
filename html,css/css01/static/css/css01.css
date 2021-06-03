@@ -1,0 +1,17 @@
+/* 2021 06 02 */
+body{
+    background:yellow;
+}
+h1{
+    color:white;
+    background:blue;
+}
+#p1{
+    color:yellow;
+    background:red;
+}
+
+.c1{
+    color:white;
+    background:black;
+}

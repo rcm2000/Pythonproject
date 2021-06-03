@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="register">
+<h1>로그인</h1>
+<table> <!--table로 정렬-->
+    <thead>
+    <tr><td>ID</td><td><input type="text" name="id"></td></tr>
+    <tr><td>PASSWORD</td><td><input type="password" name="pwd"></td></tr>
+    </thead>
+
+</table>
+    <input type="button" value="로그인">
+    <input type="submit" value="회원가입">
+    <input type="reset" value="취소">
+<h4><a href="{%url 'home'%}">뒤로가기</a></h4>
+</form>
+</body>
+</html>

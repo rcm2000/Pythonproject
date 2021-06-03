@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>회원 등록</h1>
+
+<table>
+ <thead>
+    <tr><td>ID</td><td><input type="text" name="id"></td><td><input type="button" value="중복확인"></tr>
+    <tr><td>PASSWORD</td><td><input type="password" name="pwd"></td></tr>
+    <tr><td>성함</td><td><input type="text" name="name"></td></tr>
+    </thead>
+</table>
+    성별<br>
+    <input type="radio" value="f" name="gender">남성<br>
+    <input type="radio" value="m" name="gender">여성<br>
+    취미 <br>
+    <input type="checkbox" value="h1" name="hobby">코딩
+    <input type="checkbox" value="h1" name="hobby">게임<br>
+    <input type="checkbox" value="h1" name="hobby">운동
+    <input type="checkbox" value="h1" name="hobby">독서<br>
+    <input type="checkbox" value="h1" name="hobby">명상
+    <input type="checkbox" value="h1" name="hobby">음악<br>
+    <input type="submit" value="회원 등록">
+    <input type="reset" value="취소">
+<h4><a href="{%url 'home'%}">뒤로가기</a></h4>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+  *{
+    margin:0;
+    padding:0;
+  }
+  a{
+    text-decoration:none;
+  }
+  ul,ol{
+    list-style:none;
+  }
+    header{
+    width:600px;
+    height:80px;
+    background:red;
+    margin:0 auto;
+    text-align:center;
+    }
+
+    #menu{
+  overflow: hidden;
+  width : 600px;
+  margin: 0 auto;
+}
+li{
+  float:left;
+}
+#menu > li > a{
+  text-align:center;
+  width:100px;
+  display: block;
+  padding: 10px 10px;
+  font-size:105%;
+  font-weight:bold;;
+  background: red;
+  color:white;
+}
+#menu > li > a:hover{
+background: blue;
+color:yellow;
+}
+    section{
+    width:600px;
+    height:400px;
+    background:gray;
+    margin:0 auto;
+    header > h1{
+      line-height:80px;
+    }
+    }
+    footer{
+    width:600px;
+    height:50px;
+    background:black;
+    margin:0 auto;
+    }

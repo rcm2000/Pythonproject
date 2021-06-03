@@ -1,0 +1,12 @@
+v1 = 100.12;
+print(type(v1));
+v2 = 100;
+print(type(v2));
+v3 = 'abc';
+print(type(v3));
+v4 = "abc";
+print(type(v4));
+v5 = True;
+print(type(v5));
+v6 = None;
+print(type(v6));

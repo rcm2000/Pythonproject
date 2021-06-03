@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    table{
+      width:300px;
+      height:250px;
+      border:solid 2px red;
+      border-collapse: collapse;
+    }
+    table,th,tr,td{
+      border: 2px solid black;
+
+    }
+    td{
+      text-align:center;
+    }
+
+    table > tbody > tr:nth-child(2n){
+      background:gray;
+    }
+    table > tbody > tr:hover{
+    background:black;
+    color:yellow;
+
+    }
+
+  </style>
+</head>
+<body>
+  <table>
+    <thead>
+    <tr><th>ID</th><th>PWD</th><th>NAME</th></tr>
+    </thead>
+    <tbody>
+    <tr><td>id01</td><td>pwd01</td><td>james1</td></tr>
+    <tr><td>id02</td><td>pwd02</td><td>james2</td></tr>
+    <tr><td>id03</td><td>pwd03</td><td>james3</td></tr>
+    <tr><td>id04</td><td>pwd04</td><td>james4</td></tr>
+    <tr><td>id05</td><td>pwd05</td><td>james5</td></tr>
+    </tbody>
+
+
+
+    <thead></thead>
+
+  </table>
+</body>
+</html>
