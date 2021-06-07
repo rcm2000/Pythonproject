@@ -1,5 +1,7 @@
 {% load static %}
 <section>
+    <form action="{% url 'regimpl' %}" method="get">
+        {% csrf_token %}
   <div id="reg">
   <table>
  <thead>
@@ -13,4 +15,5 @@
     <input type="reset" value="취소">
   </div>
        </div>
+    </form>
 </section>

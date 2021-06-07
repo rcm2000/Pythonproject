@@ -1,0 +1,18 @@
+{% load static %}
+<section>
+ <form action="{% url 'itemimpl' %}" method="post">
+  {% csrf_token %}
+  <table id="logintable"> <!--table로 정렬-->
+    <thead>
+    <tr><td>ITEM</td><td><input type="text" name="name"></td></tr>
+    <tr><td>PRICE</td><td><input type="text" name="price"></td></tr>
+    </thead>
+
+  </table>
+  <div id="btn">
+    <input type="submit" value="등록">
+    <input type="reset" value="취소">
+    </div>
+</form>
+
+</section>

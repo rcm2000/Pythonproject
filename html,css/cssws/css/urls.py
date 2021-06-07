@@ -28,4 +28,12 @@ urlpatterns = [
     path('ajax', views.ajax, name='ajax'),
     path('register', views.register, name='register'),
     path('login', views.login, name='login'),
+    path('loginimpl', views.loginimpl, name='loginimpl'),
+    path('regimpl', views.regimpl, name='regimpl'),
+    path('logout', views.logout, name='logout'),
+    path('userlist', views.userlist, name='userlist'),
+    path('additem', views.additem, name='additem'),
+    path('itemlist', views.itemlist, name='itemlist'),
+    path('itemimpl', views.itemimpl, name='itemimpl'),
+
     ]

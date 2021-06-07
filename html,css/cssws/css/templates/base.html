@@ -18,21 +18,33 @@
 
 </head>
 <body>
+    {% if request.session.sessionid == None %}
         <ul id="login">
-        <li><a href="{% url 'register'%}">REGISTER</a></li>
-        <li><a href="{% url 'login'%}">LOGIN</a></li>
+            <li><a href="{% url 'register'%}">REGISTER</a></li>
+            <li><a href="{% url 'login'%}">LOGIN</a></li>
         </ul>
+        {% else %}
+        <ul id="login">
+            <li><a href="#">{{request.session.sessionid}}</a></li>
+            <li><a href="{% url 'logout'%}">LOGOUT</a></li>
+        </ul>
+        {% endif %}
 
   <header>
 
       <h1>HTML5, CSS3.0</h1>
     </header>
     <ul id="menu">
-        <li><a href="{% url 'html5'%}">HTML5</a></li>
-        <li><a href="{%url 'css3'%}">CSS3.0</a></li>
-        <li><a href="{%url 'javascript'%}">JavaScript</a></li>
-        <li><a href="{%url 'jquery'%}">jQuery</a></li>
-        <li><a href="{%url 'ajax'%}">AJAX</a></li>
+        <li><a href="{% url 'html5' %}">HTML5</a></li>
+        <li><a href="{% url 'css3' %}">CSS3.0</a></li>
+        <li><a href="{% url 'javascript' %}">JavaScript</a></li>
+        <li><a href="{% url 'jquery' %}">jQuery</a></li>
+        <li><a href="{% url 'ajax' %}">AJAX</a></li>
+</ul>
+    <ul id="menu">
+        <li><a href="{% url 'userlist'%}">USER LIST</a></li>
+        <li><a href="{% url 'additem'%}">ADD ITEM</a></li>
+        <li><a href="{% url 'itemlist'%}">ITEM LIST</a></li>
 </ul>
 
 {% if section != None %}
