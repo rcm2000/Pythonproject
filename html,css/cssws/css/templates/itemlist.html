@@ -1,5 +1,15 @@
 {% load static %}
 <section>
-  <h1>itemlist page</h1>
-
+   <table>
+    <thead>
+    <h3>Item List</h3>
+      <tr><th>Name</th><th>Price</th></tr>
+    </thead>
+    <tbody>
+      {% for i in list %}
+      <tr><td>{{i.getId}}</td><td><a href="{% url 'itemdetail' %}?id={{i.getId}}">{{i.getName}}</a></td><td>{{i.getPrice}}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </section>
+

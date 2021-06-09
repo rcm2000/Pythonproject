@@ -15,7 +15,7 @@ class Sql:
         ID  INTEGER  PRIMARY KEY AUTOINCREMENT,
         NAME  TEXT,
         PRICE REAL,
-        REGDATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        REGDATE DATE DEFAULT (DATETIME('now','localtime'))
 
     ) ''';
     insert_itemdb = ''' INSERT  INTO  ITEMDB (NAME,PRICE) VALUES (?,?) ''';

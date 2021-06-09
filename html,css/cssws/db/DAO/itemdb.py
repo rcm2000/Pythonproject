@@ -53,5 +53,18 @@ class ItemDB(Sqlitedao):
 
 
 
+if __name__ == '__main__':
+    print('start test .....');
+    sqlitedao = Sqlitedao('shop');
+    sqlitedao.makeTable();
+    idb = ItemDB('shop');
+    # item insert
+    item = ItemVO(0,'pants',10000,'');
+    idb.insert(item);
+    # item selectall
+    items = idb.selectall();
+    for i in items:
+        print(i);
+    # item select
 
-
+    print('end test .....');

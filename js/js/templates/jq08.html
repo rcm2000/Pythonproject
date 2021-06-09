@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+    <!-- high chart js-->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <style>
+        #d1{
+            width: 400px;
+            border: chocolate 2px solid;
+        }
+    </style>
+    <script>
+        function display(data) {
+            $(data).each(function (index,d) {
+                $('#d1').append(d + '<br>')
+            });
+        }
+        function display2(data){
+            $('#d1').empty();
+            $(data).each(function(index,d){
+                id = d.id;
+                pwd = d.pwd;
+                name = d.name;
+                result = '<p>'+id+' '+pwd+' '+name+'</p>';
+                $('#d1').append(result);
+            });
+        };
+
+        function getdata1() {
+          var data = [1,2,3,4,5];
+          display(data);
+        };
+         function getdata2() {
+          var data = [
+              {'id':'id01','pwd':'pwd01','name':'james1'},
+              {'id':'id02','pwd':'pwd02','name':'james2'},
+              {'id':'id03','pwd':'pwd03','name':'james3'},
+              {'id':'id04','pwd':'pwd04','name':'james4'},
+              {'id':'id05','pwd':'pwd05','name':'james5'}
+          ];
+          display2(data);
+        };
+        $(document).ready(function(){
+            $('button').eq(0).click(function () {
+                $('#d1').empty();
+                getdata1();
+            })
+            $('button').eq(1).click(function () {
+                $('#d1').empty();
+            $('button').eq(2).click(function () {
+                getdata2();
+            })
+        });
+        });
+
+    </script>
+</head>
+<body>
+    <h1>jq08</h1>
+    <button>DATA1</button>
+    <button>EMPTY</button>
+    <button>DATA2</button>
+    <div id="d1"></div>
+</body>
+</html>
+

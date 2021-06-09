@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+    <!-- high chart js-->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <style>
+        #container{
+            width: 600px;
+            border: chocolate 2px solid;
+        }
+    </style>
+    <script>
+
+    var data1 = [{
+        name: 'Installation',
+        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+    }, {
+        name: 'Manufacturing',
+        data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+    }, {
+        name: 'Sales & Distribution',
+        data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+    }, {
+        name: 'Project Development',
+        data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+    }, {
+        name: 'Other',
+        data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+    }];
+
+        function display(data1) {
+                 Highcharts.chart('container', {
+
+    title: {
+        text: 'Solar Employment Growth by Sector, 2010-2016'
+    },
+
+    subtitle: {
+        text: 'Source: thesolarfoundation.com'
+    },
+
+    yAxis: {
+        title: {
+            text: 'Number of Employees'
+        }
+    },
+
+    xAxis: {
+        accessibility: {
+            rangeDescription: 'Range: 2010 to 2017'
+        }
+    },
+
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+    plotOptions: {
+        series: {
+            label: {
+                connectorAllowed: false
+            },
+            pointStart: 2010
+        }
+    },
+
+    series: data1,
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
+
+});
+
+        }
+        function display3() {
+            Highcharts.chart('container', {
+    chart: {
+        type: 'area'
+    },
+    title: {
+        text: 'Historic and Estimated Worldwide Population Distribution by Region'
+    },
+    subtitle: {
+        text: 'Source: Wikipedia.org'
+    },
+    xAxis: {
+        categories: ['1750', '1800', '1850', '1900', '1950', '1999', '2050'],
+        tickmarkPlacement: 'on',
+        title: {
+            enabled: false
+        }
+    },
+    yAxis: {
+        labels: {
+            format: '{value}%'
+        },
+        title: {
+            enabled: false
+        }
+    },
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} millions)<br/>',
+        split: true
+    },
+    plotOptions: {
+        area: {
+            stacking: 'percent',
+            lineColor: '#ffffff',
+            lineWidth: 1,
+            marker: {
+                lineWidth: 1,
+                lineColor: '#ffffff'
+            },
+            accessibility: {
+                pointDescriptionFormatter: function (point) {
+                    function round(x) {
+                        return Math.round(x * 100) / 100;
+                    }
+                    return (point.index + 1) + ', ' + point.category + ', ' +
+                        point.y + ' millions, ' + round(point.percentage) + '%, ' +
+                        point.series.name;
+                }
+            }
+        }
+    },
+    series: [{
+        name: 'Asia',
+        data: [502, 635, 809, 947, 1402, 3634, 5268]
+    }, {
+        name: 'Africa',
+        data: [106, 107, 111, 133, 221, 767, 1766]
+    }, {
+        name: 'Europe',
+        data: [163, 203, 276, 408, 547, 729, 628]
+    }, {
+        name: 'America',
+        data: [18, 31, 54, 156, 339, 818, 1201]
+    }, {
+        name: 'Oceania',
+        data: [2, 2, 2, 6, 13, 30, 46]
+    }]
+});
+        }
+        function getchart1() {
+
+          display(data1);
+        };
+        function getchart2() {
+
+          display3();
+        };
+         function display2(data){
+            $('#container').empty();
+            $(data1).each(function(index,d){
+                name = d.name;
+                data = d.data;
+                var add_data = '';
+			add_data += '<tr>';
+
+			add_data += '<td>';
+			add_data += name;
+			add_data += '</td>';
+
+			add_data += '<td>';
+			add_data += d.data;
+			add_data += '</td>';
+
+			add_data += '</tr>';
+			$('#container').append(add_data);
+            });
+        };
+
+
+        $(document).ready(function(){
+            $('button').eq(0).click(function () {
+               getchart1();
+            })
+            $('button').eq(1).click(function () {
+               getchart2()
+            $('button').eq(2).click(function () {
+                display2();
+            })
+                $('button').eq(3).click(function () {
+                $('#container').empty();
+            })
+        });
+        });
+
+    </script>
+</head>
+<body>
+    <h1>jqws</h1>
+    <button>CHART1</button>
+    <button>CHART2</button>
+    <button>DATA</button>
+    <button>EMPTY</button>
+    <div id="container"></div>
+</body>
+</html>
+

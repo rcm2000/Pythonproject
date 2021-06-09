@@ -114,8 +114,8 @@ def itemlist(request):
 def itemimpl(request):
     name = request.POST['name'];
     price = request.POST['price'];
-    item = ItemVO('id',name, price,'date');
-    udb.insert(item);
+    item = ItemVO(0, name, float(price),'');
+    idb.insert(item);
 
 
     context = {
@@ -123,22 +123,30 @@ def itemimpl(request):
         'rname': name,
 
     };
-    # try:
-    #     dbitem = idb.select(id);
-    #     if item != dbitem.getName():
-    #         request.session['sessionitem'] = item;
-    #         centerpage = 'itmeok.html'
-    #     else:
-    #         raise Exception
-    #
-    # except:
-    #     print('중복되는 아이템이 존제합니다.')
-    #     centerpage = 'itemfail.html'
-    # context = {
-    #     'rid': id,
-    #     'section': centerpage,
-    #
-    #  };
 
     return render(request, 'base.html',context)
+
+def itemlist(request):
+    items = idb.selectall()
+    context = {
+        'section': 'itemlist.html',
+        'list': items,
+    }
+    return render(request, 'base.html', context)
+def itemdetail(request):
+    id = request.GET['id'];
+    item = idb.select(id);
+    context = {
+        'itemdata': item,
+        'section': 'itemdetail.html',
+    }
+    return render(request, 'base.html', context)
+def userdetail(request):
+    id = request.GET['id'];
+    user = udb.select(id);
+    context = {
+        'userdata': user,
+        'section': 'userdetail.html',
+    }
+    return render(request, 'base.html', context)
 

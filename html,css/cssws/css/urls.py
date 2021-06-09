@@ -32,8 +32,10 @@ urlpatterns = [
     path('regimpl', views.regimpl, name='regimpl'),
     path('logout', views.logout, name='logout'),
     path('userlist', views.userlist, name='userlist'),
+    path('userdetail', views.userdetail, name='userdetail'),
     path('additem', views.additem, name='additem'),
     path('itemlist', views.itemlist, name='itemlist'),
+    path('itemdetail', views.itemdetail, name='itemdetail'),
     path('itemimpl', views.itemimpl, name='itemimpl'),
 
     ]
