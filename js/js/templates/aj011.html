@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+<style>
+    div{
+        width: 600px;
+        border: 2px solid indigo;
+    }
+</style>
+
+
+    <script>
+
+        function display(data){
+            $('#container').empty();
+            $(data).each(function (index,d) {
+                $('#container').append(d.id + d.pwd +d.age + '<br>')
+                });
+        };
+
+        function getdata(){
+           $.ajax({
+                url:'ajs011',
+                type:'GET',
+                datatype:'JSON',
+                success:function(data){
+                    display(data)
+                },
+                error:function(){
+                    alert('error....');
+                }
+           });
+        };
+
+        $(document).ready(function(){
+            $('button').click(function(){
+                getdata();
+            });
+        });
+    </script>
+
+</head>
+<body>
+        <h1>aj011</h1>
+        <button>GET DATA</button>
+        <div id="container"></div>
+
+</body>
+</html>

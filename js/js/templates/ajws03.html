@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <style>
+        div{
+            width: 500px;
+            border: 2px solid darkolivegreen;
+        }
+    </style>
+    <script>
+        function display(data) {
+            Highcharts.chart('container', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: '각 년도 별 월평균 기온'
+    },
+    subtitle: {
+        text: 'Source: WorldClimate.com'
+    },
+    xAxis: {
+        categories: [ '1', '2', '3', '4','5', '6', '7', '8', '9', '10', '11', '12']
+    },
+    yAxis: {
+        title: {
+            text: 'Temperature (°C)'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: data
+});
+        }
+
+        function getdata(year,cmd) {
+            $.ajax({
+                url:'ajs06',
+                data:{year:year,cmd:cmd},
+                datatype:'JSON',
+                success:function(data){
+                    display(data);
+                },
+                error:function(){
+                    alert('err')
+                }
+            })
+        }
+        $(document).ready(function(){
+            $('button').eq(0).click(function () {
+                year = $('input[name="year"]').val();
+                getdata(year,'e');
+            })
+
+            $('button').eq(1).click(function () {
+                year = $('input[name="year"]').val();
+                getdata(year,'a');
+            })
+
+        });
+    </script>
+</head>
+<body>
+        <h1>ajws03</h1>
+        <input type="number" name="year">
+        <button>조회</button>
+        <button>ALL</button>
+        <div id="container"></div>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <style>
+        div{
+            width: 500px;
+            border: 2px solid darkorchid;
+        }
+    </style>
+    <script>
+        function display(data) {
+            Highcharts.chart('container', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: '년도별 평균 기온'
+    },
+    subtitle: {
+        text: 'Source: WorldClimate.com'
+    },
+    xAxis: {
+        categories: [ '2010', '2011', '2012', '2013','2014', '2015', '2016', '2017', '2018', '2019', '2020']
+    },
+    yAxis: {
+        title: {
+            text: 'Temperature (°C)'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: data
+});
+        }
+
+        function getdata() {
+            $.ajax({
+                url:'ajs05',
+                datatype:'JSON',
+                success:function(data){
+                    display(data);
+                },
+                error:function(){
+                    alert('err')
+                }
+            })
+        }
+        $(document).ready(function(){
+            $('button').eq(0).click(function () {
+                getdata();
+
+            })
+        });
+    </script>
+</head>
+<body>
+        <h1>ajws02</h1>
+        <button>DATA</button>
+        <div id="container"></div>
+
+</body>
+</html>
