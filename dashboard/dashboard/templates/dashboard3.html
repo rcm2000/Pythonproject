@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+{% load static %}
+<script>
+    function display4(data) {
+        var categories = [
+];
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'bar'
+    },
+    title: {
+        text: '2021 신림동 남/여 인구 분포도'
+    },
+    subtitle: {
+        text: ''
+    },
+    accessibility: {
+        point: {
+            valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
+        }
+    },
+    xAxis: [{
+        categories: categories,
+        reversed: false,
+        labels: {
+            step: 10
+        },
+        accessibility: {
+            description: 'Age (male)'
+        }
+    }, { // mirror axis on right side
+        opposite: true,
+        reversed: false,
+        categories: categories,
+        linkedTo: 0,
+        labels: {
+            step: 10
+        },
+        accessibility: {
+            description: 'Age (female)'
+        }
+    }],
+    yAxis: {
+        title: {
+            text: null
+        },
+        labels: {
+            formatter: function () {
+                return Math.abs(this.value) ;
+            }
+        },
+        accessibility: {
+            description: 'Percentage population',
+            rangeDescription: 'Range: 0 to 5%'
+        }
+    },
+
+    plotOptions: {
+        series: {
+            stacking: 'normal'
+        }
+    },
+
+    tooltip: {
+        formatter: function () {
+            return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' +
+                'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) ;
+        }
+    },
+
+    series: data
+});
+
+    }
+    //-------------------------------------->
+    function display3(data) {
+    Highcharts.chart('container', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: '2020 6월의 최대/최저 기온'
+    },
+    subtitle: {
+        text: 'Source: WorldClimate.com'
+    },
+    xAxis: {
+        categories: ['1일', '2일', '3일', '4일', '5일', '6일', '7일', '8일', '9일', '10일', '11일', '12일','13일', '14일', '15일', '16일', '17일', '18일', '19일', '20일', '21일', '22일', '23일', '24일','25일', '26일', '27일', '28일', '29일', '30일', '31일']
+    },
+    yAxis: {
+        title: {
+            text: 'Temperature (°C)'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: data
+});
+
+    }
+    //--------------------------------------------->
+    function display2(data) {
+    Highcharts.chart('container', {
+    chart: {
+        type: 'area'
+    },
+    accessibility: {
+        description: 'Image description: An area chart compares the nuclear stockpiles of the USA and the USSR/Russia between 1945 and 2017. The number of nuclear weapons is plotted on the Y-axis and the years on the X-axis. The chart is interactive, and the year-on-year stockpile levels can be traced for each country. The US has a stockpile of 6 nuclear weapons at the dawn of the nuclear age in 1945. This number has gradually increased to 369 by 1950 when the USSR enters the arms race with 6 weapons. At this point, the US starts to rapidly build its stockpile culminating in 32,040 warheads by 1966 compared to the USSR’s 7,089. From this peak in 1966, the US stockpile gradually decreases as the USSR’s stockpile expands. By 1978 the USSR has closed the nuclear gap at 25,393. The USSR stockpile continues to grow until it reaches a peak of 45,000 in 1986 compared to the US arsenal of 24,401. From 1986, the nuclear stockpiles of both countries start to fall. By 2000, the numbers have fallen to 10,577 and 21,000 for the US and Russia, respectively. The decreases continue until 2017 at which point the US holds 4,018 weapons compared to Russia’s 4,500.'
+    },
+    title: {
+        text: '봉담읍 연령별 인구 그래프'
+    },
+    subtitle: {
+        text: 'Sources: <a href="https://thebulletin.org/2006/july/global-nuclear-stockpiles-1945-2006">' +
+            'thebulletin.org</a> &amp; <a href="https://www.armscontrol.org/factsheets/Nuclearweaponswhohaswhat">' +
+            'armscontrol.org</a>'
+    },
+    xAxis: {
+        allowDecimals: false,
+        labels: {
+            formatter: function () {
+                return this.value; // clean, unformatted number for year
+            }
+        },
+        accessibility: {
+            rangeDescription: 'Range: 1940 to 2017.'
+        }
+    },
+    yAxis: {
+        title: {
+            text: '인구수'
+        },
+        labels: {
+            formatter: function () {
+                return this.value ;
+            }
+        }
+    },
+    tooltip: {
+        pointFormat: '{series.name} <b>{point.y:,.0f}명</b><br/>{point.x}세'
+    },
+    plotOptions: {
+        area: {
+            pointStart: 0,
+            marker: {
+                enabled: false,
+                symbol: 'circle',
+                radius: 2,
+                states: {
+                    hover: {
+                        enabled: true
+                    }
+                }
+            }
+        }
+    },
+    series: data
+});
+
+    }
+    //----------------------------------------------------->
+    function display1(data) {
+        Highcharts.setOptions({
+    colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
+        return {
+            radialGradient: {
+                cx: 0.5,
+                cy: 0.3,
+                r: 0.7
+            },
+            stops: [
+                [0, color],
+                [1, Highcharts.color(color).brighten(-0.3).get('rgb')] // darken
+            ]
+        };
+    })
+});
+
+// Build the chart
+Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: '수원역, 분당선의 유/무임 승/하차 차트'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                connectorColor: 'silver'
+            }
+        }
+    },
+    series: data
+});
+    }
+    function getdata4(target) {
+
+        $.ajax({
+            url:'genders',
+            data:{target:target},
+            datatype:'JSON',
+            success:function (data) {
+                    display4(data);
+                },
+                error:function(){
+                    alert('err')
+  }
+      })
+    }
+    function getdata1(station,line) {
+    $.ajax({
+                url:'subs',
+                data:{station:station,line:line},
+                datatype:'JSON',
+                success:function(data){
+                    display1(data);
+                },
+                error:function(){
+                    alert('err')
+  }
+      })
+    }
+    function getdata3(year,month) {
+            $.ajax({
+                url:'ws',
+                data:{year:year,month:month},
+                datatype:'JSON',
+                success:function(data){
+                    display3(data);
+                },
+                error:function(){
+                    alert('err')
+        }
+      })
+    }
+
+    function getdata2(target) {
+            $.ajax({
+                url:'ages',
+                data:{target:target},
+                datatype:'JSON',
+                success:function(data){
+                    display2(data);
+                
+                },
+                error:function(){
+                    alert('err')
+  }
+      })
+    }
+    $(document).ready(function(){
+        $('#card1').click(function () {
+            station = '수원';
+            line = '분당';
+            $('#container').empty()
+            getdata1(station,line);
+        })
+        $('#card2').click(function () {
+            target = '봉담읍'
+            $('#container').empty()
+            getdata2(target);
+        })
+        $('#card3').click(function () {
+            year = '2020';
+            month = '6';
+            $('#container').empty()
+            getdata3(year,month);
+        })
+        $('#card4').click(function () {
+            target = '신림동'
+            $('#container').empty()
+            getdata4(target);
+        })
+    })
+
+</script>
+<section>
+<main>
+      <div class="container-fluid px-4">
+          <h1 class="mt-4">Dashboard3</h1>
+          <ol class="breadcrumb mb-4">
+              <li class="breadcrumb-item active">Dashboard</li>
+          </ol>
+
+          <div class="row">
+              <div class="col-xl-3 col-md-6">
+                  <div class="card bg-primary text-white mb-4">
+                      <div class="card-body">Chart1</div>
+                      <div class="card-footer d-flex align-items-center justify-content-between">
+                          <a class="small text-white stretched-link" href="#" id="card1">View Details</a>
+                          <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                  <div class="card bg-warning text-white mb-4">
+                      <div class="card-body">Chart2</div>
+                      <div class="card-footer d-flex align-items-center justify-content-between">
+                          <a class="small text-white stretched-link" href="#" id="card2">View Details</a>
+                          <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                  <div class="card bg-success text-white mb-4">
+                      <div class="card-body">Chart3</div>
+                      <div class="card-footer d-flex align-items-center justify-content-between">
+                          <a class="small text-white stretched-link" href="#" id="card3">View Details</a>
+                          <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                  <div class="card bg-danger text-white mb-4">
+                      <div class="card-body">Chart4</div>
+                      <div class="card-footer d-flex align-items-center justify-content-between">
+                          <a class="small text-white stretched-link" href="#" id="card4">View Details</a>
+                          <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+    <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-chart-area me-1"></i>
+                Area Chart Example
+            </div>
+            <div class="card-body">
+                <div id="container" width="100%" height="30"></div></div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>
+</main>
+</section>

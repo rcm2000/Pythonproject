@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      #container{
+        width: 500px;
+        border: 2px solid mediumslateblue;
+      }
+
+    </style>
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+    function display(data) {
+        Highcharts.setOptions({
+    colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
+        return {
+            radialGradient: {
+                cx: 0.5,
+                cy: 0.3,
+                r: 0.7
+            },
+            stops: [
+                [0, color],
+                [1, Highcharts.color(color).brighten(-0.3).get('rgb')] // darken
+            ]
+        };
+    })
+});
+
+// Build the chart
+Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: '해당 역, 호선의 유/무임 승/하차 차트'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                connectorColor: 'silver'
+            }
+        }
+    },
+    series: data
+});
+    }
+  function getdata(station,line) {
+    $.ajax({
+                url:'subs',
+                data:{station:station,line:line},
+                datatype:'JSON',
+                success:function(data){
+                    display(data);
+                },
+                error:function(){
+                    alert('err')
+  }
+      })
+    }
+
+         $(document).ready(function(){
+                    $('button').eq(0).click(function () {
+                     station = $('input[name="station"]').val();
+                     line = $('input[name="line"]').val();
+                     getdata(station,line);
+                 })
+       });
+</script>
+</head>
+<body>
+    <h1>Substation</h1>
+    <input type="text" name="station">역
+    <input type="text" name="line">호선
+    <button>GET DATA</button>
+    <div id="container"></div>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <style>
+    div{
+      width: 500px;
+      border: 2px solid mediumslateblue;
+
+  }</style>
+
+  <script>
+      function display() {
+          Highcharts.chart('container', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: '월별 최대/최저 기온'
+    },
+    subtitle: {
+        text: 'Source: WorldClimate.com'
+    },
+    xAxis: {
+        categories: ['1일', '2일', '3일', '4일', '5일', '6일', '7일', '8일', '9일', '10일', '11일', '12일','13일', '14일', '15일', '16일', '17일', '18일', '19일', '20일', '21일', '22일', '23일', '24일','25일', '26일', '27일', '28일', '29일', '30일', '31일']
+    },
+    yAxis: {
+        title: {
+            text: 'Temperature (°C)'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: data
+});
+      }
+    function getdata(year,month) {
+            $.ajax({
+                url:'ws',
+                data:{year:year,month:month},
+                datatype:'JSON',
+                success:function(data){
+                    display(data);
+                },
+                error:function(){
+                    alert('err')
+        }
+      })
+    }
+
+    $(document).ready(function(){
+            $('button').eq(0).click(function () {
+                year = $('input[name="year"]').val();
+                month = $('input[name="month"]').val();
+                getdata(year,month);
+            });
+    });
+  </script>
+</head>
+<body>
+  <h1>w</h1>
+    <input type="number" id="year">
+    <input type="number" id="month">
+    <button>CHART</button>
+    <div id="container"></div>
+</body>
+</html>
