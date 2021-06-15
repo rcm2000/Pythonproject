@@ -7,6 +7,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from dashboard.analysis.myanalysis import MyAnalysis
+from dashboard.analysis.p230 import P230
 
 
 def home(request):
@@ -39,6 +40,11 @@ def dashboard2(request):
 def dashboard3(request):
     context = {
         'section':'dashboard3.html'
+    };
+    return render(request, 'index.html', context)
+def dashboard4(request):
+    context = {
+        'section':'dashboard4.html'
     };
     return render(request, 'index.html', context)
 def tabledata(request):
@@ -121,4 +127,14 @@ def ws(request):
 def genders(request):
     target = request.GET['target'];
     data = MyAnalysis().localage2(target);
+    return HttpResponse(json.dumps(data),content_type='application/json');
+def babys(request):
+    data = P230().p231();
+    return HttpResponse(json.dumps(data),content_type='application/json');
+def pops(request):
+    data = P230().p232();
+    return HttpResponse(json.dumps(data),content_type='application/json');
+def loc(request):
+    loc = request.GET['loc'];
+    data = P230().p248(loc);
     return HttpResponse(json.dumps(data),content_type='application/json');

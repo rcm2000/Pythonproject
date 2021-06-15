@@ -24,6 +24,7 @@ urlpatterns = [
     path('dashboard1', views.dashboard1, name='dashboard1'),
     path('dashboard2', views.dashboard2, name='dashboard2'),
     path('dashboard3', views.dashboard3, name='dashboard3'),
+    path('dashboard4', views.dashboard4, name='dashboard4'),
     path('tabledata', views.tabledata, name='tabledata'),
     path('chart1', views.chart1, name='chart1'),
     path('chart2', views.chart2, name='chart2'),
@@ -31,4 +32,8 @@ urlpatterns = [
     path('ages', views.ages, name='ages'),
     path('ws', views.ws, name='ws'),
     path('genders', views.genders, name='genders'),
+    path('babys', views.babys, name='babys'),
+    path('pops', views.pops, name='pops'),
+    path('loc', views.loc, name='loc'),
+
 ]
