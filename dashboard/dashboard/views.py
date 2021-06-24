@@ -132,9 +132,10 @@ def babys(request):
     data = P230().p231();
     return HttpResponse(json.dumps(data),content_type='application/json');
 def pops(request):
-    data = P230().p232();
-    return HttpResponse(json.dumps(data),content_type='application/json');
+    data = P230().p233();
+    return HttpResponse(json.dumps(data), content_type='application/json');
 def loc(request):
     loc = request.GET['loc'];
     data = P230().p248(loc);
     return HttpResponse(json.dumps(data),content_type='application/json');
+

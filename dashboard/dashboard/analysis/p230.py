@@ -87,6 +87,30 @@ class P230:
         return pop_list1
 
 
+    def p233(self):
+        f = open(DATA_DIRS[0] + '\\age4.csv')
+        data = csv.reader(f)
+        next(data)
+        data = list(data)
+
+        f = open(DATA_DIRS[0] + '\\age5.csv')
+        data2 = csv.reader(f)
+        next(data2)
+        data2 = list(data2)
+        data3 = []
+        data4 = []
+        loc = []
+        for row in range(1,len(data)):
+            data3.append(int(data[row][27])-int(data2[row][1]))
+            loc.append(data[row][0].split(' ')[1])
+        data4 = [{
+        'name': 'population',
+        'data': data3
+        }]
+        result = loc,data4
+        print(type(result[1]))
+        return result
+
 
 
 
@@ -97,6 +121,8 @@ class P230:
 
 
 if __name__ == '__main__':
-    P230().p248('신림동')
+    x = P230().p233()
+    print(x)
+
 
 

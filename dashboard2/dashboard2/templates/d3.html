@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{%load static%}
+<script>
+    function display(data) {
+        Highcharts.chart('myAreaChart', {
+    chart: {
+        type: 'area'
+    },
+    title: {
+        text: '코로나 상황판'
+    },
+    subtitle: {
+        text: 'Source: Wikipedia.org'
+    },
+    xAxis: {
+        categories: data[0],
+        tickmarkPlacement: 'on',
+        title: {
+            enabled: false
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Billions'
+        },
+        labels: {
+            formatter: function () {
+                return this.value / 1000;
+            }
+        }
+    },
+    tooltip: {
+        split: true,
+        valueSuffix: ' millions'
+    },
+    plotOptions: {
+        area: {
+            stacking: 'normal',
+            lineColor: '#666666',
+            lineWidth: 1,
+            marker: {
+                lineWidth: 1,
+                lineColor: '#666666'
+            }
+        }
+    },
+    series: data[1]
+});
+    }
+    $(document).ready(function () {
+        $('#getdata').click(function () {
+            startdt = $('input[name = "startdt"]').val().replaceAll('-','')
+            enddt = $('input[name = "enddt"]').val().replaceAll('-','')
+            //alert(startdt+' '+enddt)
+            $.ajax({
+                url:'d3s',
+                dataType:'JSON',
+                data:{startdt:startdt,enddt:enddt},
+                success:function (data) {
+                    display(data)
+                }
+            })
+        })
+    })
+</script>
+ <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Charts 3</h1>
+
+
+                    <!-- Content Row -->
+                    <div class="row">
+                        <input type="date" name="startdt">
+                        <input type="date" name="enddt">
+                        <button id="getdata">GET DATA</button>
+                        <div class="col-xl-8 col-lg-7">
+
+                            <!-- Area Chart -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                                </div>
+                                <div class="card-body">
+
+                                        <div id="myAreaChart"></div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+<!-- /.container-fluid -->

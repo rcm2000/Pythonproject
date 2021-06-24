@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+{%load static%}
+<script>
+    function display(data) {
+Highcharts.chart('myAreaChart', {
+    chart: {
+        zoomType: 'xy'
+    },
+    title: {
+        text: '원자재 농산물 증시',
+        align: 'left'
+    },
+    subtitle: {
+        text: 'Source: 네이버 증시',
+        align: 'left'
+    },
+    xAxis: [{
+        categories: data[0],
+        crosshair: true
+    }],
+    yAxis: [{ // Primary yAxis
+        labels: {
+            format: '{value}%',
+            style: {
+                color: Highcharts.getOptions().colors[2]
+            }
+        },
+        title: {
+            text: '등락율',
+            style: {
+                color: Highcharts.getOptions().colors[2]
+            }
+        },
+        opposite: true
+
+    }, { // Secondary yAxis
+        gridLineWidth: 0,
+        title: {
+            text: '현재가',
+            style: {
+                color: Highcharts.getOptions().colors[0]
+            }
+        },
+        labels: {
+            format: '{value} 원',
+            style: {
+                color: Highcharts.getOptions().colors[0]
+            }
+        }
+
+    }, { // Tertiary yAxis
+        gridLineWidth: 0,
+        title: {
+            text: '전일비',
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+        },
+        labels: {
+            format: '{value} %',
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+        },
+        opposite: true
+    }],
+    tooltip: {
+        shared: true
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'left',
+        x: 80,
+        verticalAlign: 'top',
+        y: 55,
+        floating: true,
+        backgroundColor:
+            Highcharts.defaultOptions.legend.backgroundColor || // theme
+            'rgba(255,255,255,0.25)'
+    },
+    series: data[1],
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    floating: false,
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom',
+                    x: 0,
+                    y: 0
+                },
+                yAxis: [{
+                    labels: {
+                        align: 'right',
+                        x: 0,
+                        y: -6
+                    },
+                    showLastLabel: false
+                }, {
+                    labels: {
+                        align: 'left',
+                        x: 0,
+                        y: -6
+                    },
+                    showLastLabel: false
+                }, {
+                    visible: false
+                }]
+            }
+        }]
+    }
+});
+
+    }
+    $(document).ready(function () {
+        $.ajax({
+                url:'d4s',
+                dataType:'JSON',
+                success:function (data) {
+                    display(data)
+                }
+            })
+    })
+</script>
+ <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Charts 4</h1>
+
+
+                    <!-- Content Row -->
+                    <div class="row">
+                        <div class="col-xl-8 col-lg-7">
+
+                            <!-- Area Chart -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                                </div>
+                                <div class="card-body">
+
+                                        <div id="myAreaChart"></div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+<!-- /.container-fluid -->

@@ -64,20 +64,41 @@
     function display2(data) {
     Highcharts.chart('container', {
     chart: {
-        type: 'area'
+        type: 'column',
+        options3d: {
+            enabled: true,
+            alpha: 10,
+            beta: 25,
+            depth: 70
+        }
     },
     title: {
-        text: '서울시 인구 증감표'
+        text: '3D chart with null values'
+    },
+    subtitle: {
+        text: 'Notice the difference between a 0 value and a null point'
+    },
+    plotOptions: {
+        column: {
+            depth: 25
+        }
     },
     xAxis: {
-        categories: ['2018', '2019', '2020', 'Grapes', 'Bananas']
+        categories: data[0],
+        labels: {
+            skew3d: true,
+            style: {
+                fontSize: '16px'
+            }
+        }
     },
-    credits: {
-        enabled: false
+    yAxis: {
+        title: {
+            text: null
+        }
     },
-    series: data
+    series: data[1]
 });
-
     }
     //----------------------------------------------------->
     function display1(data) {
@@ -164,7 +185,7 @@
       })
     }
 
-    function getdata2(target) {
+    function getdata2() {
             $.ajax({
                 url:'pops',
                 datatype:'JSON',
